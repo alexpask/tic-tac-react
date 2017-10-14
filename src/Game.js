@@ -77,9 +77,9 @@ export default class Game extends Component {
     render() {
         let content = null;
         if (this.state.hasWon)
-            content = (<p>Player {this.state.currentPlayer} has won</p>);
+            content = (<p id="message">Player {this.state.currentPlayer} has won</p>);
         else if (this.state.hasDrawn)
-            content = (<p>Match drawn</p>);
+            content = (<p id="message">Match drawn</p>);
         else
             content = (<p>A simple game of tic tac toe to play against the computer. Start by choosing a square to play.</p>,
                        <BoxGrid gameState={this.state.gameState} onBoxClick={this.boxClicked.bind(this)}/>);

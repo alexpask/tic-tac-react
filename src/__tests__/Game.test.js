@@ -69,7 +69,7 @@ describe('<Game/>', () => {
         const gameState = {
             one: 'X',
             two: 'X',
-            three: 'X',
+            three: 'O',
             four: 'O',
             five: '',
             six: '',
@@ -84,5 +84,42 @@ describe('<Game/>', () => {
         wrapper.instance().boxClicked("two");
         expect(wrapper.state().gameState["two"]).toBe("X");
         expect(wrapper.state().currentPlayer).toBe("O");
+    });
+
+    it('should declare a drawn', () => {
+        const gameState = {
+            one: 'X',
+            two: 'X',
+            three: 'O',
+            four: 'O',
+            five: 'O',
+            six: 'X',
+            seven: 'X',
+            eight: 'O',
+            nine: ''
+        };
+        const wrapper = shallow(<Game />);
+        wrapper.setState({gameState: gameState});
+        wrapper.instance().boxClicked("nine");
+        expect(wrapper.state().hasDrawn).toBeTruthy();
+    });
+
+    it('should declare a win', () => {
+        const gameState = {
+            one: 'X',
+            two: 'X',
+            three: '',
+            four: '',
+            five: '',
+            six: '',
+            seven: '',
+            eight: '',
+            nine: ''
+        };
+        const wrapper = shallow(<Game />);
+        wrapper.setState({gameState: gameState});
+        wrapper.setState({currentPlayer: "X"});
+        wrapper.instance().boxClicked("three");
+        expect(wrapper.state().hasWon).toBeTruthy();
     });
 });
